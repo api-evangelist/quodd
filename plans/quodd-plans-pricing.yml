@@ -1,0 +1,84 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: QUODD
+providerId: quodd
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Market Data
+- Real-Time Data
+- Financial Data
+- Plans
+description: >-
+  QUODD does not publish public, self-serve pricing. Access to the market data
+  APIs is provisioned through a trial and through enterprise/commercial
+  agreements arranged with QUODD's sales and data-licensing teams. Pricing is
+  shaped by the datasets consumed (real-time vs delayed vs historical, asset
+  classes, exchange entitlements), delivery method (Cloud APIs, Cloud Streaming,
+  Cloud Files, gRPC), redistribution vs internal use, and exchange licensing
+  fees passed through from the venues. No per-call or per-seat public rates are
+  reconciled here.
+notes: >-
+  Exchange market-data licensing fees are typically layered on top of QUODD's
+  own fees and vary by venue and by display vs non-display / internal vs
+  external distribution. Confirm current commercial terms directly with QUODD.
+sources:
+- https://www.quodd.com/
+- https://www.quodd.com/financial-data-apis
+- https://www.quodd.com/advanced-api-delivery
+- https://developer.quodd.com/
+plans:
+- id: quodd-trial
+  name: Trial
+  type: trial
+  description: >-
+    Trial access for evaluating the QUODD Developer Platform. Trial users
+    generate a 24-hour token (POST token-for-trial-user) to call the REST
+    snapshot APIs. Scope and duration are set by QUODD.
+  entries:
+  - label: Trial Access
+    name: trial_access
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: trial (contact QUODD to enable)
+    userMultiplied: false
+  elements:
+  - name: REST Snapshot APIs
+  - name: Developer Platform Documentation
+  - name: 24-Hour Access Tokens
+- id: quodd-enterprise
+  name: Enterprise / Commercial
+  type: enterprise
+  description: >-
+    Firm/commercial agreement covering production market data access - real-time,
+    delayed, historical, and reference datasets across global asset classes -
+    via Cloud APIs, Cloud Streaming, Cloud Files, and gRPC, with entitlements and
+    exchange licensing arranged per customer. Contact sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Real-Time and Delayed Pricing
+  - name: Historical and End-of-Day Data
+  - name: Reference Data and Security Master
+  - name: Fundamentals and Estimates
+  - name: Cloud Streaming
+  - name: gRPC Delivery
+  - name: Exchange Entitlements and Licensing
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

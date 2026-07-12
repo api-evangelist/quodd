@@ -1,0 +1,22 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/quodd-openapi.yml
+summary:
+  types:
+  - apiKey
+schemes:
+- name: tokenQuery
+  type: apiKey
+  in: query
+  keyName: _token
+  description: >-
+    QUODD uses token-based authentication. Trial or firm users exchange a
+    username and password for an access token via the token endpoints (POST
+    token-for-trial-user / token-for-firm-user). The token is appended to each
+    REST request as the `_token` query parameter and expires after 24 hours,
+    after which a new token must be generated. Production credentials are
+    provisioned through a trial or an enterprise agreement with QUODD.
+  sources:
+  - https://developer.quodd.com/docs/rest-api/post-token-for-trial-user
+  - https://developer.quodd.com/docs/rest-api/post-token-for-firm-user
+  - https://www.quodd.com/faqs/what-is-an-api-token

@@ -1,0 +1,297 @@
+openapi: 3.0.3
+info:
+  title: QUODD Market Data API (Modeled)
+  description: >-
+    A modeled OpenAPI description of the QUODD REST market data API. QUODD is a
+    cloud-native market data provider. Its Developer Platform
+    (developer.quodd.com) documents a token-authenticated REST API for pricing
+    snapshots - Snap, Batch Snaps, Options Snap, and Batch Options Snaps - plus
+    token generation for trial and firm users. Authentication exchanges a
+    username and password for an access token that is appended to requests as
+    the `_token` query parameter and expires after 24 hours.
+
+    IMPORTANT - endpointsModeled: QUODD does not publish its literal REST base
+    URL or exact endpoint path format openly (production access is gated behind
+    trial/firm credentials and enterprise agreements). The paths below are
+    honestly modeled from the documented operation list and may differ from the
+    live routes. They represent the documented surface, not verified endpoints.
+    No WebSocket or Server-Sent Events transport is documented on QUODD's own
+    platform; QUODD's Cloud Streaming transport is not publicly specified.
+  version: '1.0'
+  contact:
+    name: QUODD
+    url: https://www.quodd.com
+servers:
+  - url: https://api.quodd.com
+    description: QUODD API (base URL referenced for the gRPC Snap service; REST base is gated - modeled)
+security:
+  - tokenQuery: []
+tags:
+  - name: Authentication
+    description: Token generation for trial and firm users.
+  - name: Snapshots
+    description: Real-time or delayed equity pricing snapshots.
+  - name: Options
+    description: Real-time or delayed options pricing snapshots.
+paths:
+  /tokens/trial:
+    post:
+      operationId: createTrialToken
+      tags:
+        - Authentication
+      summary: Token for trial user
+      description: >-
+        Exchange trial-user credentials for an access token. Modeled path. The
+        token expires after 24 hours and is passed on subsequent requests as the
+        `_token` query parameter.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credentials'
+      responses:
+        '200':
+          description: An access token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /tokens/firm:
+    post:
+      operationId: createFirmToken
+      tags:
+        - Authentication
+      summary: Token for firm user
+      description: >-
+        Exchange firm-user credentials for an access token. Modeled path. The
+        token expires after 24 hours.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credentials'
+      responses:
+        '200':
+          description: An access token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /snap/{ticker}:
+    get:
+      operationId: getSnap
+      tags:
+        - Snapshots
+      summary: Get a pricing snapshot for one ticker
+      description: >-
+        Real-time or delayed pricing snapshot for a single instrument. Modeled
+        path.
+      parameters:
+        - name: ticker
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Instrument symbol.
+      responses:
+        '200':
+          description: A pricing snapshot.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Snap'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /snaps:
+    get:
+      operationId: listSnaps
+      tags:
+        - Snapshots
+      summary: Get snapshots for many tickers (batch)
+      description: Batch snapshot retrieval via a comma-separated ticker list. Modeled path.
+      parameters:
+        - name: tickers
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Comma-separated list of instrument symbols.
+      responses:
+        '200':
+          description: A batch of pricing snapshots.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapBatch'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: batchSnaps
+      tags:
+        - Snapshots
+      summary: Get snapshots for many tickers (batch, POST)
+      description: Batch snapshot retrieval via a ticker array in the request body. Modeled path.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TickerList'
+      responses:
+        '200':
+          description: A batch of pricing snapshots.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapBatch'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /options/snap/{ticker}:
+    get:
+      operationId: getOptionsSnap
+      tags:
+        - Options
+      summary: Get an options pricing snapshot for one contract
+      description: Real-time or delayed pricing snapshot for a single option contract. Modeled path.
+      parameters:
+        - name: ticker
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Option contract symbol.
+      responses:
+        '200':
+          description: An options pricing snapshot.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Snap'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /options/snaps:
+    get:
+      operationId: listOptionsSnaps
+      tags:
+        - Options
+      summary: Get options snapshots for many contracts (batch)
+      description: Batch options snapshot retrieval via a comma-separated contract list. Modeled path.
+      parameters:
+        - name: tickers
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Comma-separated list of option contract symbols.
+      responses:
+        '200':
+          description: A batch of options pricing snapshots.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapBatch'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: batchOptionsSnaps
+      tags:
+        - Options
+      summary: Get options snapshots for many contracts (batch, POST)
+      description: Batch options snapshot retrieval via a contract array in the request body. Modeled path.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TickerList'
+      responses:
+        '200':
+          description: A batch of options pricing snapshots.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapBatch'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    tokenQuery:
+      type: apiKey
+      in: query
+      name: _token
+      description: >-
+        Access token obtained from the token endpoints (trial or firm user) and
+        appended to each request as the `_token` query parameter. Expires after
+        24 hours.
+  responses:
+    Unauthorized:
+      description: Missing, invalid, or expired token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Credentials:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Access token, valid for 24 hours.
+    TickerList:
+      type: object
+      required:
+        - tickers
+      properties:
+        tickers:
+          type: array
+          items:
+            type: string
+    Snap:
+      type: object
+      description: A pricing snapshot. Field set is modeled and representative, not exhaustive.
+      properties:
+        ticker:
+          type: string
+        last:
+          type: number
+        bid:
+          type: number
+        ask:
+          type: number
+        volume:
+          type: integer
+        currency:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+    SnapBatch:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Snap'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string

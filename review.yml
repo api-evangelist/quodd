@@ -1,0 +1,115 @@
+aid: quodd
+name: QUODD
+review:
+  question: Does QUODD expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-11'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. QUODD's own Developer Platform
+    (developer.quodd.com) documents a token-authenticated REST API and a gRPC
+    API for pricing snapshots and ticker info - both request/response. QUODD
+    markets a "Cloud Streaming" delivery option that pushes changing quote and
+    trade fields, but the streaming transport is not publicly documented on
+    QUODD's own developer platform: no wss:// endpoint, channel model, or
+    message schema is published openly, and production access is gated behind
+    trial/firm credentials and enterprise contact-sales agreements. WebSocket
+    access to QUODD market-data feeds IS documented, but on a third-party
+    platform (Intrinio's Real-Time SDK), not on QUODD's own API surface, so it
+    is out of scope for a QUODD AsyncAPI document. Because no first-party
+    WebSocket (or SSE) transport is publicly documented, there is nothing to
+    model.
+findings:
+  summary: |
+    QUODD does not publish a documented public WebSocket API on its own
+    developer platform. QUODD is a cloud-native market data provider (real-time,
+    delayed, historical, end-of-day, and point-in-time pricing plus reference
+    data, security master, fundamentals, estimates, corporate actions, ESG, and
+    news across global asset classes). Its Developer Platform documents a
+    RESTful API (token auth via POST token-for-trial-user / token-for-firm-user,
+    then a _token query parameter; endpoints Snap, Batch Snaps, Options Snap,
+    Batch Options Snaps, plus Beta Barcharts and Ticker Search) and a gRPC API
+    (Snap gRPC, Ticker Info gRPC). Both are request/response. A "Cloud
+    Streaming" product is marketed for continuous quote/trade updates, but the
+    underlying transport is not publicly specified on developer.quodd.com. The
+    only WebSocket documentation for QUODD data lives on Intrinio's platform via
+    their Real-Time SDK - a third-party wrapper, not QUODD's own API. No
+    first-party wss:// endpoint is documented as of the review date.
+  accessModel: |
+    Developer documentation is publicly readable, but production access is
+    gated. Callers authenticate by exchanging username/password for a 24-hour
+    token (trial users or firm users), and full commercial access is
+    enterprise/contact-sales. Exact REST base URLs and endpoint paths are not
+    published openly; api.quodd.com is referenced for the gRPC Snap service. As
+    a result the OpenAPI in this entry is honestly modeled (endpointsModeled)
+    from the documented operation list rather than copied from a published spec.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.quodd.com
+      documented: true
+      note: Token-authenticated snapshot API (Snap, Batch Snaps, Options Snaps). Exact base URL and paths are gated; modeled here.
+    - protocol: gRPC
+      scheme: https
+      baseURL: https://api.quodd.com
+      documented: true
+      note: Snap gRPC and Ticker Info gRPC services. Request/response snapshots, not a server-push WebSocket.
+    - protocol: Cloud Streaming
+      scheme: unspecified
+      documented: false
+      note: Marketed as continuous streaming of changing quote/trade fields, but the transport is not publicly documented on QUODD's own developer platform.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No first-party WebSocket endpoint is published by QUODD. WebSocket access to QUODD feeds is documented only via Intrinio's third-party Real-Time SDK.
+  endpointsModeled:
+    - POST   https://api.quodd.com/tokens/trial
+    - POST   https://api.quodd.com/tokens/firm
+    - GET    https://api.quodd.com/snap/{ticker}
+    - GET    https://api.quodd.com/snaps
+    - POST   https://api.quodd.com/snaps
+    - GET    https://api.quodd.com/options/snap/{ticker}
+    - GET    https://api.quodd.com/options/snaps
+    - POST   https://api.quodd.com/options/snaps
+  endpointsModeledNote: |
+    These paths are honestly modeled from the QUODD REST API reference operation
+    list (Token for Trial/Firm User, Snap, Batch Snaps, Options Snap, Batch
+    Options Snaps). QUODD does not publish the literal base URL or path format
+    openly, so exact routes may differ. They are provided to represent the
+    documented surface, not as verified live routes.
+sources:
+  - url: https://developer.quodd.com/
+    type: Documentation
+    note: Developer Platform landing - lists RESTful API, gRPC API, Snapshots, Ticker Info, Barcharts (Beta), Ticker Search (Beta).
+  - url: https://developer.quodd.com/docs/rest-api
+    type: APIReference
+    note: REST API reference - token auth and snapshot endpoints. All request/response; no WebSocket documented.
+  - url: https://developer.quodd.com/docs/rest-api/post-token-for-trial-user
+    type: APIReference
+    note: Token generation for trial users; username/password to a 24-hour token used as the _token query parameter.
+  - url: https://developer.quodd.com/docs/rest-api/post-batch-snaps
+    type: APIReference
+    note: Batch Snaps endpoint (GET and POST) for retrieving pricing for many tickers at once.
+  - url: https://developer.quodd.com/docs/snap-grpc-api
+    type: Documentation
+    note: gRPC Snap service; request/response snapshots.
+  - url: https://www.quodd.com/advanced-api-delivery
+    type: Documentation
+    note: Cloud delivery options - Cloud APIs (REST), Cloud Streaming, Cloud Alerts, Cloud Search, Cloud Files. Streaming transport not specified.
+  - url: https://www.quodd.com/financial-data-apis
+    type: Documentation
+    note: Data products - pricing, reference/security master, fundamentals, estimates across global asset classes. Enterprise contact-sales.
+  - url: https://docs.intrinio.com/documentation/websocket_quodd_tsx
+    type: Documentation
+    note: WebSocket access to QUODD TSX/TSX-V feeds documented on Intrinio's platform via their Real-Time SDK - third party, not QUODD's own API.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No first-party WebSocket protocol surface is publicly documented. QUODD's
+    own developer platform exposes token-authenticated REST and gRPC snapshot
+    APIs (request/response) plus a marketed but not-publicly-specified Cloud
+    Streaming option. No AsyncAPI document was created because there is no
+    documented server-push transport on QUODD's own API to model; the only
+    WebSocket documentation for QUODD data is a third-party Intrinio SDK wrapper.

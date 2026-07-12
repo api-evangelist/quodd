@@ -1,0 +1,238 @@
+aid: quodd
+url: https://raw.githubusercontent.com/api-evangelist/quodd/refs/heads/main/apis.yml
+name: QUODD
+kind: company
+description: >-
+  QUODD is a cloud-native market data provider delivering real-time, delayed,
+  historical, end-of-day, and point-in-time pricing, plus reference data, a
+  security master, fundamentals, estimates, corporate actions, ESG, and news
+  across global equities, ETFs, options, fixed income, FX, funds, and indices.
+  The QUODD Developer Platform (developer.quodd.com) exposes market data through
+  REST and gRPC snapshot APIs, token-based authentication, and cloud delivery
+  options - Cloud APIs, Cloud Streaming, Cloud Alerts, Cloud Search, and Cloud
+  Files. QUODD advertises more than 250 billion data points across 150-plus
+  global exchanges. Developer documentation is public, but production access is
+  gated behind trial or firm credentials and enterprise contact-sales
+  agreements; exact REST base URLs and full endpoint paths are not published
+  openly.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Market Data
+- Real-Time Data
+- Financial Data
+- Streaming
+- Historical Data
+- Reference Data
+- Quotes
+- Fintech
+created: '2026-07-11'
+modified: '2026-07-11'
+specificationVersion: '0.19'
+apis:
+- aid: quodd:quodd-snap-api
+  name: QUODD Snap API
+  tags:
+  - Market Data
+  - Real-Time Data
+  - Quotes
+  - Pricing
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.quodd.com/docs/rest-api
+  baseURL: https://api.quodd.com
+  properties:
+  - url: https://developer.quodd.com/docs/rest-api
+    type: Documentation
+  - url: https://developer.quodd.com/docs/rest-api/get-snap
+    type: APIReference
+  - url: openapi/quodd-openapi.yml
+    type: OpenAPI
+  description: >-
+    Single-ticker real-time or delayed pricing snapshot (Snap). Returns the
+    current quote and trade fields - last price, bid/ask, volume, and related
+    market data - for one instrument across QUODD's global asset-class coverage.
+    Endpoint paths are honestly modeled; QUODD does not publish exact REST paths.
+- aid: quodd:quodd-batch-snaps-api
+  name: QUODD Batch Snaps API
+  tags:
+  - Market Data
+  - Real-Time Data
+  - Batch
+  - Quotes
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.quodd.com/docs/rest-api/post-batch-snaps
+  baseURL: https://api.quodd.com
+  properties:
+  - url: https://developer.quodd.com/docs/rest-api/post-batch-snaps
+    type: APIReference
+  - url: openapi/quodd-openapi.yml
+    type: OpenAPI
+  description: >-
+    Batch snapshot retrieval for many tickers in a single request, via GET (query
+    list) or POST (ticker array). Returns real-time or delayed pricing for each
+    requested instrument. Documented in QUODD's REST API reference as Batch Snaps.
+- aid: quodd:quodd-options-snaps-api
+  name: QUODD Options Snaps API
+  tags:
+  - Options
+  - Market Data
+  - Real-Time Data
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.quodd.com/docs/rest-api/post-batch-options-snaps
+  baseURL: https://api.quodd.com
+  properties:
+  - url: https://developer.quodd.com/docs/rest-api/post-batch-options-snaps
+    type: APIReference
+  - url: openapi/quodd-openapi.yml
+    type: OpenAPI
+  description: >-
+    Real-time or delayed options pricing snapshots for single contracts (Options
+    Snap) and for many contracts at once (Batch Options Snaps, GET and POST).
+    Documented in the QUODD REST API reference.
+- aid: quodd:quodd-authentication-token-api
+  name: QUODD Authentication Token API
+  tags:
+  - Authentication
+  - Tokens
+  - Security
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.quodd.com/docs/rest-api/post-token-for-trial-user
+  baseURL: https://api.quodd.com
+  properties:
+  - url: https://developer.quodd.com/docs/rest-api/post-token-for-trial-user
+    type: APIReference
+  - url: https://developer.quodd.com/docs/rest-api/post-token-for-firm-user
+    type: APIReference
+  - url: https://www.quodd.com/faqs/what-is-an-api-token
+    type: Documentation
+  - url: openapi/quodd-openapi.yml
+    type: OpenAPI
+  description: >-
+    Token generation for trial and firm users. Exchanges username and password
+    credentials for an access token that is appended to REST requests as the
+    _token query parameter. Tokens expire after 24 hours and must be regenerated.
+- aid: quodd:quodd-ticker-search-api
+  name: QUODD Ticker Search API
+  tags:
+  - Reference Data
+  - Search
+  - Symbols
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.quodd.com/
+  baseURL: https://api.quodd.com
+  properties:
+  - url: https://developer.quodd.com/
+    type: Documentation
+  - url: openapi/quodd-openapi.yml
+    type: OpenAPI
+  description: >-
+    Ticker and symbol lookup for discovering securities across asset classes and
+    identifiers (Cloud Search). Listed as Beta Access on the QUODD Developer
+    Platform; endpoint paths are modeled.
+- aid: quodd:quodd-historical-prices-api
+  name: QUODD Historical Prices API
+  tags:
+  - Historical Data
+  - End of Day
+  - Financial Data
+  - Market Data
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.quodd.com/historical-stock-prices-api-global-market-data
+  baseURL: https://api.quodd.com
+  properties:
+  - url: https://www.quodd.com/historical-stock-prices-api-global-market-data
+    type: Documentation
+  description: >-
+    End-of-day and historical market data across 80-plus global exchanges - US
+    equities and ETFs from 1994, global markets from 2000 - as OHLCV time series
+    or point-in-time snapshots, with adjusted and unadjusted series and automatic
+    corporate-action adjustments (splits, dividends, spinoffs). Described in
+    QUODD product documentation; concrete endpoints are modeled, not published.
+- aid: quodd:quodd-reference-data-security-master-api
+  name: QUODD Reference Data & Security Master API
+  tags:
+  - Reference Data
+  - Security Master
+  - Corporate Actions
+  - Financial Data
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.quodd.com/financial-data-apis
+  baseURL: https://api.quodd.com
+  properties:
+  - url: https://www.quodd.com/financial-data-apis
+    type: Documentation
+  description: >-
+    Global reference data and security master (Global Master) - intra-day global
+    equity descriptive data, funds, corporate actions, dividends, and fixed
+    income terms and conditions. Described in QUODD product documentation;
+    concrete endpoints are modeled, not published.
+- aid: quodd:quodd-fundamentals-estimates-api
+  name: QUODD Fundamentals & Estimates API
+  tags:
+  - Fundamentals
+  - Estimates
+  - Financial Data
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.quodd.com/financial-data-apis
+  baseURL: https://api.quodd.com
+  properties:
+  - url: https://www.quodd.com/financial-data-apis
+    type: Documentation
+  description: >-
+    Company fundamentals, metrics, ratios, and analyst estimates on global
+    securities for fundamental analysis. Described in QUODD product
+    documentation; concrete endpoints are modeled, not published.
+- aid: quodd:quodd-snap-grpc-api
+  name: QUODD Snap gRPC API
+  tags:
+  - gRPC
+  - Market Data
+  - Real-Time Data
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.quodd.com/docs/snap-grpc-api
+  baseURL: https://api.quodd.com
+  properties:
+  - url: https://developer.quodd.com/docs/snap-grpc-api
+    type: Documentation
+  - url: https://developer.quodd.com/docs/ticker-info-grpc-api
+    type: Documentation
+  description: >-
+    gRPC delivery of pricing snapshots (Snap) and ticker information (Ticker
+    Info) for high-performance, low-overhead integrations. Documented on the
+    QUODD Developer Platform alongside the REST API.
+- aid: quodd:quodd-cloud-streaming-api
+  name: QUODD Cloud Streaming API
+  tags:
+  - Real-Time Data
+  - Streaming
+  - Market Data
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.quodd.com/advanced-api-delivery
+  baseURL: https://api.quodd.com
+  properties:
+  - url: https://www.quodd.com/advanced-api-delivery
+    type: Documentation
+  description: >-
+    Cloud Streaming pushes changing quote and trade fields continuously rather
+    than requiring repeated REST polling, for live market data in servers, web,
+    and mobile apps. QUODD's own developer platform does not publicly document
+    the streaming transport (no wss:// endpoint is published); third-party
+    WebSocket access to QUODD feeds is documented via Intrinio's Real-Time SDK.
+    Access is gated behind enterprise agreements.
+common:
+- type: Authentication
+  url: authentication/quodd-authentication.yml
+- type: LinkedIn
+  url: https://www.linkedin.com/company/quodd-financial-information-services
+- type: Website
+  url: https://www.quodd.com
+- type: Documentation
+  url: https://developer.quodd.com
+- type: Plans
+  url: plans/quodd-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/quodd-rate-limits.yml
+- type: FinOps
+  url: finops/quodd-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

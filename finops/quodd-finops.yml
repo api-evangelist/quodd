@@ -1,0 +1,91 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: QUODD
+providerId: quodd
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Market Data
+- Real-Time Data
+- Financial Data
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of QUODD market data spend. QUODD does not publish public rates;
+  cost is contractual and driven primarily by which datasets and asset classes
+  are licensed (real-time vs delayed vs historical vs reference), the delivery
+  method (Cloud APIs, Cloud Streaming, Cloud Files, gRPC), whether data is used
+  internally or redistributed/displayed, and the exchange market-data licensing
+  fees passed through from each venue. Those exchange fees are frequently the
+  largest and most variable component of total market-data cost.
+notes: >-
+  Per-unit rates are not reconciled here. The dominant cost drivers are dataset
+  entitlements and exchange licensing (display vs non-display, internal vs
+  external distribution), not per-API-call fees. Confirm the fee schedule and
+  exchange pass-throughs directly with QUODD.
+sources:
+- https://www.quodd.com/
+- https://www.quodd.com/financial-data-apis
+- https://www.quodd.com/advanced-api-delivery
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: QUODD
+serviceCategory: Market Data and Financial Information
+billingModel:
+  pricingCategory: Committed-Use
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+focusColumns:
+  ServiceName: QUODD Market Data
+  ServiceCategory: Market Data and Financial Information
+  ProviderName: QUODD
+  PublisherName: QUODD
+  InvoiceIssuerName: QUODD
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Committed-Use
+meters:
+- name: dataset_entitlements
+  description: Licensed datasets and asset classes (real-time, delayed, historical, reference, fundamentals) under the agreement.
+  unit: datasets
+  aggregation: sum
+  dimensions:
+  - account
+  - dataset
+- name: exchange_licensing
+  description: Exchange market-data licensing fees passed through per venue, varying by display/non-display and internal/external distribution.
+  unit: subscriptions
+  aggregation: sum
+  dimensions:
+  - account
+  - exchange
+- name: delivery_method
+  description: Delivery channel consumed - Cloud APIs (REST), Cloud Streaming, Cloud Files, or gRPC.
+  unit: channels
+  aggregation: sum
+  dimensions:
+  - account
+  - channel
+principles:
+- name: Visibility
+  description: Track dataset entitlements and exchange licensing separately; exchange pass-through fees are often the largest and most variable line item.
+- name: Allocation
+  description: Map licensed datasets, exchanges, and delivery channels to the teams and products that consume them.
+- name: Optimization
+  description: License only the exchanges and asset classes actually needed; prefer delayed over real-time where acceptable; use batch snapshots and streaming to reduce redundant calls; scope historical pulls.
+- name: Accountability
+  description: Assign an owner for the market-data contract; review entitlements and exchange fees against usage on a recurring basis.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

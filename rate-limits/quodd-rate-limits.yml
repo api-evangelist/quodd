@@ -1,0 +1,65 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: QUODD
+providerId: quodd
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Market Data
+- Real-Time Data
+- Financial Data
+- Rate Limiting
+- Quotas
+description: >-
+  QUODD does not publish fixed numeric API rate limits openly. Access is
+  token-authenticated (a 24-hour token per trial or firm user) and governed by
+  the entitlements in each customer's agreement - which datasets, asset classes,
+  and exchanges are licensed, and whether data is real-time, delayed, or
+  historical - rather than by a published per-minute request cap. Batch snapshot
+  endpoints let callers retrieve many tickers per request to reduce call volume;
+  Cloud Streaming pushes only changing quote/trade fields instead of requiring
+  repeated polling. Concrete quotas are set per contract.
+notes: >-
+  Numeric per-account or per-endpoint limits are not documented as of the review
+  date. Tokens expire after 24 hours and must be regenerated. Confirm any
+  request-rate, concurrency, or entitlement limits with QUODD during
+  onboarding.
+sources:
+- https://developer.quodd.com/docs/rest-api
+- https://www.quodd.com/faqs/what-is-an-api-token
+- https://www.quodd.com/advanced-api-delivery
+responseCodes:
+  throttled: 429
+limits:
+- name: REST API Requests
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented; governed by the commercial agreement.
+- name: Access Token Lifetime
+  scope: token
+  metric: hours
+  limit: 24
+  notes: Tokens expire 24 hours after generation and must be regenerated.
+- name: Batch Snap Size
+  scope: request
+  metric: tickers
+  limit: per contract
+  notes: Batch Snaps and Batch Options Snaps accept multiple tickers per request; effective size is governed by the agreement.
+- name: Dataset Entitlements
+  scope: account
+  metric: datasets
+  limit: per contract
+  notes: Access to real-time, delayed, historical, and reference datasets and specific exchanges is set by entitlements.
+policies:
+- name: Token Rotation
+  description: Clients must regenerate the 24-hour token before expiry and handle 401 responses by re-authenticating.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+- name: Prefer Streaming for Live Data
+  description: For continuously changing data, use Cloud Streaming rather than repeatedly polling the REST snapshot endpoints.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
