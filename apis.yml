@@ -219,6 +219,8 @@ apis:
     WebSocket access to QUODD feeds is documented via Intrinio's Real-Time SDK.
     Access is gated behind enterprise agreements.
 common:
+- type: AgenticAccess
+  url: agentic-access/quodd-agentic-access.yml
 - type: Authentication
   url: authentication/quodd-authentication.yml
 - type: LinkedIn
