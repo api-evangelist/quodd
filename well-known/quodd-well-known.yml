@@ -1,0 +1,31 @@
+generated: '2026-07-22'
+method: searched
+source: live probes of /.well-known/ on apis.yml + OpenAPI hosts
+description: >-
+  Probe record of the /.well-known/ discovery surface across QUODD's hosts.
+  Nothing is published: api.quodd.com answers 401 for every path (a gateway
+  catch-all in front of the whole host), developer.quodd.com and www.quodd.com
+  return 404s for every well-known document probed. Absence recorded as valid
+  data; no raw files saved because nothing returned 200 with real content.
+hosts:
+- host: https://api.quodd.com
+  documents:
+  - {path: /.well-known/security.txt, status: 401}
+  - {path: /.well-known/openid-configuration, status: 401}
+  - {path: /.well-known/oauth-authorization-server, status: 401}
+  - {path: /.well-known/api-catalog, status: 401}
+  - {path: /.well-known/ai-plugin.json, status: 401}
+- host: https://developer.quodd.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404, note: 301 to trailing slash then 404 Docusaurus shell}
+  - {path: /.well-known/oauth-authorization-server, status: 404, note: 301 to trailing slash then 404 Docusaurus shell}
+  - {path: /.well-known/api-catalog, status: 404, note: 301 to trailing slash then 404 Docusaurus shell}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://www.quodd.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}

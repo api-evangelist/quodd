@@ -1,0 +1,15 @@
+generated: '2026-07-22'
+method: generated
+skills:
+- file: quodd-authenticate-and-snap.md
+  name: Authenticate and get a pricing snapshot
+  api: openapi/quodd-snapshots-api-openapi.yml
+  operations: [createTrialToken, createFirmToken, getSnap]
+- file: quodd-batch-snapshots.md
+  name: Batch snapshots for equities and options
+  api: openapi/quodd-snapshots-api-openapi.yml
+  operations: [listSnaps, batchSnaps, getOptionsSnap, listOptionsSnaps, batchOptionsSnaps]
+- file: quodd-grpc-market-data.md
+  name: Stream and query market data over gRPC
+  api: grpc/quodd-grpc.yml
+  operations: [GetSnapsStream, GetSnaps, GetTickerInfo, GetOptionTickers, GetOptionExpirations]

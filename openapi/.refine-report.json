@@ -1,0 +1,18 @@
+{
+  "provider": "quodd",
+  "sources": [
+    "quodd-authentication-api-openapi.yml",
+    "quodd-options-api-openapi.yml",
+    "quodd-snapshots-api-openapi.yml"
+  ],
+  "outputs": [
+    "quodd-authentication-api-openapi.yml",
+    "quodd-options-api-openapi.yml",
+    "quodd-snapshots-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

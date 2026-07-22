@@ -1,0 +1,57 @@
+generated: '2026-07-22'
+method: searched
+source: https://developer.quodd.com/docs/snap-grpc-api
+description: >-
+  Index of QUODD's published gRPC service definitions. QUODD publishes real
+  proto3 files (with client code examples in C#, Go, Node, and Ruby) as
+  downloadable zip bundles on the QUODD Developer Platform. The .proto files in
+  this directory are saved verbatim from those bundles. All services are served
+  at api.quodd.com:443 and require a JWT bearer token in gRPC metadata; the Snap
+  service additionally requires an AssetType metadata header (Equities or
+  Options).
+host: api.quodd.com:443
+services:
+- file: quodd-snap.proto
+  package: snap
+  service: SnapService
+  methods:
+  - name: GetSnapsStream
+    request: SnapStreamRequest
+    response: stream SnapMessage
+    description: Returns a stream of snapshots for a list of tickers.
+  - name: GetSnaps
+    request: SnapsRequest
+    response: SnapResponse
+    description: Returns snapshots for a list of tickers.
+  source: https://developer.quodd.com/assets/files/snap-grpc-api-83f1013fe8601893b396f6cf04ee2f88.zip
+  docs: https://developer.quodd.com/docs/snap-grpc-api
+- file: quodd-info.proto
+  package: info
+  service: TickerInfoService
+  methods:
+  - name: GetTickerInfo
+    request: TickerInfoRequest
+    response: TickerInfoResponse
+    description: Returns basic fundamental data for specified tickers.
+  source: https://developer.quodd.com/assets/files/ticker-info-grpc-api-b69d5ffe0cbb3a8b8f323935d7818c11.zip
+  docs: https://developer.quodd.com/docs/ticker-info-grpc-api
+- file: quodd-optionlookup.proto
+  package: optionlookup
+  service: OptionLookupService
+  methods:
+  - name: GetOptionTickers
+    request: GetOptionTickersRequest
+    response: GetOptionTickersResponse
+    description: Returns options tickers for underlying ticker.
+  - name: GetOptionExpirations
+    request: GetOptionExpirationsRequest
+    response: GetOptionExpirationsResponse
+    description: Returns options expiration dates for underlying ticker.
+  source: https://developer.quodd.com/assets/files/option-lookup-grpc-api-5d64a05181606aefbb58890bd6288b40.zip
+  docs: https://developer.quodd.com/docs/option-lookup-grpc-api
+notes: >-
+  The gRPC streaming connection (GetSnapsStream) stays open while market data is
+  available and is terminated automatically after 30 minutes without active
+  data; clients are required to implement reconnection logic. Ticker symbology
+  supports extensions .D (delayed), .NB (Nasdaq Basic), and .NB.D (Nasdaq Basic
+  delayed).

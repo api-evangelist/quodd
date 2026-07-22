@@ -1,0 +1,47 @@
+generated: '2026-07-22'
+method: derived
+status: candidate
+source: openapi/quodd-snapshots-api-openapi.yml, openapi/quodd-options-api-openapi.yml, openapi/quodd-authentication-api-openapi.yml, grpc/quodd-grpc.yml
+description: >-
+  QUODD publishes no official hosted MCP server (no MCP endpoint on
+  developer.quodd.com or api.quodd.com, no GitHub org, no entry in the official
+  MCP registry as of the probe date). This is a candidate tool list derived
+  from the modeled OpenAPI operations and the published gRPC service
+  definitions, describing what a QUODD MCP server would expose.
+server:
+  name: quodd
+  transport: http
+tools:
+- name: create_trial_token
+  description: Exchange trial-user credentials for a 24-hour access token.
+  source_operation: openapi/quodd-authentication-api-openapi.yml#createTrialToken
+- name: create_firm_token
+  description: Exchange firm-user credentials for a 24-hour access token.
+  source_operation: openapi/quodd-authentication-api-openapi.yml#createFirmToken
+- name: get_snap
+  description: Get a real-time or delayed pricing snapshot for one ticker.
+  source_operation: openapi/quodd-snapshots-api-openapi.yml#getSnap
+- name: list_snaps
+  description: Get pricing snapshots for a list of tickers (GET batch).
+  source_operation: openapi/quodd-snapshots-api-openapi.yml#listSnaps
+- name: batch_snaps
+  description: Get pricing snapshots for an array of tickers (POST batch).
+  source_operation: openapi/quodd-snapshots-api-openapi.yml#batchSnaps
+- name: get_options_snap
+  description: Get a pricing snapshot for one options contract.
+  source_operation: openapi/quodd-options-api-openapi.yml#getOptionsSnap
+- name: list_options_snaps
+  description: Get pricing snapshots for a list of options contracts (GET batch).
+  source_operation: openapi/quodd-options-api-openapi.yml#listOptionsSnaps
+- name: batch_options_snaps
+  description: Get pricing snapshots for an array of options contracts (POST batch).
+  source_operation: openapi/quodd-options-api-openapi.yml#batchOptionsSnaps
+- name: get_ticker_info
+  description: Get basic fundamental data for tickers (gRPC TickerInfoService.GetTickerInfo).
+  source_operation: grpc/quodd-info.proto#GetTickerInfo
+- name: get_option_tickers
+  description: List options tickers for an underlying ticker (gRPC OptionLookupService.GetOptionTickers).
+  source_operation: grpc/quodd-optionlookup.proto#GetOptionTickers
+- name: get_option_expirations
+  description: List options expiration dates for an underlying ticker (gRPC OptionLookupService.GetOptionExpirations).
+  source_operation: grpc/quodd-optionlookup.proto#GetOptionExpirations

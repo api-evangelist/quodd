@@ -1,0 +1,32 @@
+generated: '2026-07-22'
+method: searched
+source: https://developer.quodd.com/, https://www.quodd.com/, live probes
+versioning:
+  scheme: none-published
+  current: null
+  docs: null
+  notes: >-
+    Neither the REST reference nor the gRPC docs publish an API versioning
+    scheme (no version segment, header, or date-based versioning is
+    documented).
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: No deprecation policy or RFC 8594 Sunset/Deprecation header support is published.
+sla:
+  url: null
+  uptime_target: null
+  notes: No public SLA; service levels are set in enterprise agreements.
+status_page: null
+status_page_notes: >-
+  No public status page found - status.quodd.com does not resolve and no status
+  link appears on www.quodd.com or developer.quodd.com.
+credential_lifecycle:
+  token_ttl: 24 hours
+  rotation: Tokens expire after 24 hours and must be regenerated via the token endpoints.
+  grpc_connection: >-
+    gRPC streaming connections are terminated automatically after 30 minutes
+    without active market data; clients must implement reconnection logic.
+deprecated_operations: []
+roadmap_signals:
+- MX Feed listed as "coming soon" on https://developer.quodd.com/snapshots

@@ -1,0 +1,36 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for QUODD Options API
+  version: 1.0.0
+x-provenance:
+  generated: '2026-07-22'
+  method: generated
+  source: https://developer.quodd.com/docs/rest-api
+extends: openapi/quodd-options-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist:
+      provider: quodd
+      docs: https://developer.quodd.com/docs/rest-api
+      note: >-
+        Options snapshots carry option-specific fields documented in the
+        published Snap schema - UnderlyingTicker, OptionType, ExpirationDate,
+        StrikePrice - alongside the shared quote/trade fields. Option
+        ticker/expiration discovery is served by the Option Lookup gRPC service
+        (grpc/quodd-optionlookup.proto).
+- target: $.paths['/options/snap/{ticker}'].get
+  update:
+    externalDocs:
+      description: GET - Options Snap
+      url: https://developer.quodd.com/docs/rest-api/get-options-snap
+- target: $.paths['/options/snaps'].get
+  update:
+    externalDocs:
+      description: GET - Batch Options Snaps
+      url: https://developer.quodd.com/docs/rest-api/get-batch-options-snaps
+- target: $.paths['/options/snaps'].post
+  update:
+    externalDocs:
+      description: POST - Batch Options Snaps
+      url: https://developer.quodd.com/docs/rest-api/post-batch-options-snaps

@@ -1,0 +1,39 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for QUODD Snapshots API
+  version: 1.0.0
+x-provenance:
+  generated: '2026-07-22'
+  method: generated
+  source: https://developer.quodd.com/docs/rest-api
+extends: openapi/quodd-snapshots-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist:
+      provider: quodd
+      docs: https://developer.quodd.com/docs/rest-api
+      feeds:
+      - Realtime (stocks, options)
+      - Delayed (stocks, options)
+      - Nasdaq Basic (stocks)
+      - MX Feed (coming soon per developer.quodd.com/snapshots)
+      ticker-symbology:
+        '.D': Delayed
+        '.NB': Nasdaq Basic
+        '.NB.D': Nasdaq Basic Delayed
+- target: $.paths['/snap/{ticker}'].get
+  update:
+    externalDocs:
+      description: GET - Snap
+      url: https://developer.quodd.com/docs/rest-api/get-snap
+- target: $.paths['/snaps'].get
+  update:
+    externalDocs:
+      description: GET - Batch Snaps
+      url: https://developer.quodd.com/docs/rest-api/get-batch-snaps
+- target: $.paths['/snaps'].post
+  update:
+    externalDocs:
+      description: POST - Batch Snaps
+      url: https://developer.quodd.com/docs/rest-api/post-batch-snaps

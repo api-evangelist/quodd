@@ -1,0 +1,38 @@
+# QUODD
+
+> QUODD is a cloud-native market data provider delivering real-time, delayed, historical, end-of-day, and point-in-time pricing, plus reference data, a security master, fundamentals, estimates, corporate actions, ESG, and news across global equities, ETFs, options, fixed income, FX, funds, and indices. The QUODD Developer Platform documents a token-authenticated REST API and gRPC services for pricing snapshots, ticker fundamentals, and option lookup. Developer documentation is public; production access is gated behind trial or firm credentials and enterprise agreements.
+
+Authentication: exchange a username and password for an access token (POST Token for Trial User / Token for Firm User); the token is appended to REST requests as the `_token` query parameter and expires after 24 hours. gRPC requests carry the JWT as a `Authorization: Bearer` metadata entry; the Snap gRPC service also requires an `AssetType` metadata header (`Equities` or `Options`).
+
+## APIs
+
+- [REST API reference](https://developer.quodd.com/docs/rest-api): Snap, Batch Snaps, Options Snap, Batch Options Snaps, plus token generation
+- [Snap gRPC API](https://developer.quodd.com/docs/snap-grpc-api): streaming and request/response snapshots (SnapService at api.quodd.com:443)
+- [Ticker Info gRPC API](https://developer.quodd.com/docs/ticker-info-grpc-api): basic fundamentals per ticker (TickerInfoService)
+- [Option Lookup gRPC API](https://developer.quodd.com/docs/option-lookup-grpc-api): options tickers and expirations (OptionLookupService)
+- [Snapshots overview](https://developer.quodd.com/snapshots): feeds - Realtime, Delayed, Nasdaq Basic; MX Feed coming soon
+
+## Specs
+
+- [OpenAPI - Snapshots (modeled)](https://raw.githubusercontent.com/api-evangelist/quodd/refs/heads/main/openapi/quodd-snapshots-api-openapi.yml): getSnap, listSnaps, batchSnaps
+- [OpenAPI - Options (modeled)](https://raw.githubusercontent.com/api-evangelist/quodd/refs/heads/main/openapi/quodd-options-api-openapi.yml): getOptionsSnap, listOptionsSnaps, batchOptionsSnaps
+- [OpenAPI - Authentication (modeled)](https://raw.githubusercontent.com/api-evangelist/quodd/refs/heads/main/openapi/quodd-authentication-api-openapi.yml): createTrialToken, createFirmToken
+- [snap.proto (published by QUODD)](https://raw.githubusercontent.com/api-evangelist/quodd/refs/heads/main/grpc/quodd-snap.proto): SnapService - GetSnapsStream, GetSnaps
+- [info.proto (published by QUODD)](https://raw.githubusercontent.com/api-evangelist/quodd/refs/heads/main/grpc/quodd-info.proto): TickerInfoService - GetTickerInfo
+- [optionlookup.proto (published by QUODD)](https://raw.githubusercontent.com/api-evangelist/quodd/refs/heads/main/grpc/quodd-optionlookup.proto): OptionLookupService - GetOptionTickers, GetOptionExpirations
+
+## Docs
+
+- [Developer Platform](https://developer.quodd.com/)
+- [What is an API token (FAQ)](https://www.quodd.com/faqs/what-is-an-api-token)
+- [Financial data APIs overview](https://www.quodd.com/financial-data-apis)
+- [Advanced API delivery (Cloud APIs, Streaming, Alerts, Search, Files)](https://www.quodd.com/advanced-api-delivery)
+- [Support](https://www.quodd.com/support)
+- [Terms of use](https://www.quodd.com/terms-of-use)
+- [Privacy policy](https://www.quodd.com/privacy-policy)
+
+## Notes
+
+- QUODD does not publish its literal REST base URL or exact endpoint paths openly; the OpenAPI paths above are honestly modeled from the documented operation surface.
+- No first-party SDKs on public package registries; gRPC client examples (C#, Go, Node, Ruby) ship as zip downloads with the proto files.
+- No public status page, webhook surface, or AsyncAPI is documented; Cloud Streaming's transport is not publicly specified (third-party WebSocket access exists via Intrinio).

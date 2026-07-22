@@ -1,0 +1,32 @@
+generated: '2026-07-22'
+method: derived
+source: openapi/, grpc/quodd-snap.proto, grpc/quodd-info.proto, grpc/quodd-optionlookup.proto
+description: >-
+  Entity graph derived from the modeled OpenAPI schemas and QUODD's published
+  proto3 definitions. The core entity is the instrument (ticker); snapshots,
+  fundamentals, and option contracts all hang off it.
+entities:
+- name: Ticker
+  description: An instrument identifier (equity, ETF, or option contract), with symbology extensions .D / .NB / .NB.D for delayed and Nasdaq Basic feeds.
+- name: Snap
+  description: Point-in-time NBBO quote and aggregated trade snapshot (REST Snap/Batch Snaps; gRPC SnapMessage).
+  key_fields: [Ticker, Bid, Ask, Last, TotalVolume, VWAP, IsDelayed, Error]
+- name: OptionsSnap
+  description: Snapshot for an option contract; extends the shared snapshot fields with option-specific fields.
+  key_fields: [UnderlyingTicker, OptionType, ExpirationDate, StrikePrice]
+- name: TickerInfo
+  description: Basic fundamentals per ticker (gRPC TickerInfoMessage).
+  key_fields: [ticker, name, market_cap, price_to_earnings, beta, dividend, sector]
+- name: Option
+  description: An option contract listing from Option Lookup (gRPC Option message).
+  key_fields: [ticker, underlying_ticker, expiration_date, option_type, strike_price]
+- name: Token
+  description: 24-hour access credential issued to a trial or firm user.
+relationships:
+- {from: Snap, to: Ticker, type: belongs_to, via: Ticker}
+- {from: OptionsSnap, to: Ticker, type: belongs_to, via: Ticker}
+- {from: OptionsSnap, to: Ticker, type: belongs_to, via: UnderlyingTicker, notes: the underlying instrument}
+- {from: TickerInfo, to: Ticker, type: belongs_to, via: ticker}
+- {from: Option, to: Ticker, type: belongs_to, via: underlying_ticker}
+- {from: Ticker, to: Option, type: has_many, via: underlying_ticker, notes: option chain per underlying}
+- {from: Ticker, to: Snap, type: has_one, via: Ticker, notes: current snapshot at request time}

@@ -1,0 +1,32 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for QUODD Authentication API
+  version: 1.0.0
+x-provenance:
+  generated: '2026-07-22'
+  method: generated
+  source: https://developer.quodd.com/docs/rest-api
+extends: openapi/quodd-authentication-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist:
+      provider: quodd
+      docs: https://developer.quodd.com/docs/rest-api
+      note: >-
+        The published reference documents the credentials for both token
+        operations as HEADER parameters (username, password) rather than a JSON
+        request body; the modeled spec uses a body. Tokens expire after 24
+        hours - regenerate by calling the operation again.
+- target: $.paths['/tokens/trial'].post
+  update:
+    externalDocs:
+      description: POST - Token for Trial User
+      url: https://developer.quodd.com/docs/rest-api/post-token-for-trial-user
+    x-quodd-credential-location: header parameters (username, password) per published reference
+- target: $.paths['/tokens/firm'].post
+  update:
+    externalDocs:
+      description: POST - Token for Firm User
+      url: https://developer.quodd.com/docs/rest-api/post-token-for-firm-user
+    x-quodd-credential-location: header parameters (username, password) per published reference

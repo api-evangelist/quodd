@@ -1,0 +1,59 @@
+generated: '2026-07-22'
+method: searched
+source: https://developer.quodd.com/docs/rest-api, https://developer.quodd.com/docs/snap-grpc-api, openapi/
+description: >-
+  Cross-cutting request/response semantics of the QUODD APIs, captured from the
+  published Developer Platform reference and the modeled OpenAPI.
+authentication:
+  rest: >-
+    Exchange username/password (documented as header parameters on the token
+    operations) for an access token; append it to every REST request as the
+    _token query parameter. Tokens expire after 24 hours.
+  grpc: >-
+    JWT presented as Authorization Bearer metadata. The Snap gRPC service also
+    requires an AssetType metadata header set to Equities or Options.
+  artifact: authentication/quodd-authentication.yml
+idempotency:
+  supported: false
+  notes: >-
+    No idempotency-key contract is published. The public surface is read-only
+    market data (snapshots, lookups, fundamentals), so requests are naturally
+    idempotent, but no header or retention policy is documented.
+pagination:
+  style: none
+  notes: >-
+    No pagination convention. Batch endpoints accept explicit ticker lists
+    (GET query list or POST array); gRPC requests take repeated ticker fields.
+field_selection:
+  supported: partial
+  notes: >-
+    The Ticker Info gRPC service accepts a repeated fields parameter to select
+    which fundamental fields are returned. No REST sparse-fields convention is
+    documented.
+ticker_symbology:
+  '.D': Delayed
+  '.NB': Nasdaq Basic
+  '.NB.D': Nasdaq Basic Delayed
+data_freshness:
+  delayed_flag: IsDelayed boolean on snapshot payloads; price information is 15 minutes delayed when true.
+  timestamps: LastTimestamp / QuoteTimestamp in EST, format YYYY-MM-DDTHH:MM:SS.sssssss.
+request_tracing:
+  request_id_header: null
+  notes: No request-id / correlation header documented.
+versioning:
+  scheme: none-published
+  artifact: lifecycle/quodd-lifecycle.yml
+error_envelope:
+  rest: 'Error object { code, message }; per-instrument errors in the Error field on each snapshot object.'
+  grpc: error string fields and ErrorInfoMessage { ticker, error, message }.
+  artifact: errors/quodd-problem-types.yml
+rate_limit_signaling:
+  headers: none documented
+  artifact: rate-limits/quodd-rate-limits.yml
+  notes: 429 assumed for throttling; concrete quotas are set per contract, not published.
+streaming:
+  notes: >-
+    gRPC GetSnapsStream keeps the connection open while market data is
+    available; auto-terminates after 30 idle minutes - implement reconnection
+    logic. REST callers poll; Cloud Streaming transport is not publicly
+    specified.

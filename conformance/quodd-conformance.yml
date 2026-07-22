@@ -1,0 +1,34 @@
+generated: '2026-07-22'
+method: derived
+source: openapi/, grpc/, security/quodd-domain-security.yml, developer.quodd.com
+standards:
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 security scheme; REST auth is an apiKey-style _token query parameter, gRPC uses a JWT bearer metadata entry.
+- id: oidc
+  conforms: false
+  evidence: No /.well-known/openid-configuration on any QUODD host (404/401 on all probes).
+- id: jwt
+  conforms: true
+  evidence: gRPC services require a JWT presented as Authorization Bearer metadata (developer.quodd.com/docs/snap-grpc-api).
+- id: grpc-proto3
+  conforms: true
+  evidence: Published proto3 service definitions for SnapService, TickerInfoService, OptionLookupService (grpc/*.proto, saved verbatim from developer.quodd.com downloads).
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors are plain JSON objects (code/message) and in-payload Error fields; no application/problem+json.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: No /.well-known/security.txt on any host.
+- id: tls-1-3
+  conforms: true
+  evidence: www.quodd.com, developer.quodd.com, and api.quodd.com all negotiate TLSv1.3 with HSTS max-age 31536000 (security/quodd-domain-security.yml).
+- id: json-api
+  conforms: false
+  evidence: Responses are bespoke JSON snapshot objects, not JSON:API documents.
+- id: pagination
+  conforms: false
+  evidence: No pagination convention documented; batch endpoints take explicit ticker lists instead.
+- id: idempotency-key
+  conforms: false
+  evidence: No idempotency-key header or policy documented; market-data reads are naturally idempotent but no contract is published.

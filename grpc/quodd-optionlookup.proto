@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package optionlookup;
+
+service OptionLookupService { 
+  // Returns options tickers for underlying ticker. 
+  rpc GetOptionTickers (GetOptionTickersRequest) returns (GetOptionTickersResponse);
+  // Returns options expiration dates for underlying ticker. 
+  rpc GetOptionExpirations (GetOptionExpirationsRequest) returns (GetOptionExpirationsResponse);
+}
+
+message GetOptionTickersRequest {
+   // Underlying ticker.
+   string underlying_ticker = 1;
+   // (optional) The type of the option contract.
+   string option_type = 2;
+   // (optional) The expiration date of the option contract.
+   string expiration_date = 3;
+}
+
+message GetOptionTickersResponse {
+   // Option tickers for the underlying ticker. 
+   repeated Option options = 1;
+   // Details of the error.
+   string error = 2;
+}
+
+message GetOptionExpirationsRequest {
+   // Underlying ticker.
+   string underlying_ticker = 1;
+}
+
+message GetOptionExpirationsResponse {
+   // Option Expiration dates for underlying ticker.
+   repeated string expirations = 1;
+   // Details of the error.
+   string error = 2;
+}
+
+message Option {
+	// The option ticker symbol.
+    string ticker = 1;
+	// Underlying ticker.
+    string underlying_ticker = 2;
+	// The expiration date of the option contract.
+    string expiration_date = 3;
+	// Type of the option contract.
+    string option_type = 4;
+	// Strike price of the option contract.
+    double strike_price = 5;
+}

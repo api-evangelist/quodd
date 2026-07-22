@@ -1,0 +1,101 @@
+openapi: 3.0.3
+info:
+  title: QUODD Market Data API (Modeled) Authentication API
+  description: 'A modeled OpenAPI description of the QUODD REST market data API. QUODD is a cloud-native market data provider. Its Developer Platform (developer.quodd.com) documents a token-authenticated REST API for pricing snapshots - Snap, Batch Snaps, Options Snap, and Batch Options Snaps - plus token generation for trial and firm users. Authentication exchanges a username and password for an access token that is appended to requests as the `_token` query parameter and expires after 24 hours.
+
+    IMPORTANT - endpointsModeled: QUODD does not publish its literal REST base URL or exact endpoint path format openly (production access is gated behind trial/firm credentials and enterprise agreements). The paths below are honestly modeled from the documented operation list and may differ from the live routes. They represent the documented surface, not verified endpoints. No WebSocket or Server-Sent Events transport is documented on QUODD''s own platform; QUODD''s Cloud Streaming transport is not publicly specified.'
+  version: '1.0'
+  contact:
+    name: QUODD
+    url: https://www.quodd.com
+servers:
+- url: https://api.quodd.com
+  description: QUODD API (base URL referenced for the gRPC Snap service; REST base is gated - modeled)
+security:
+- tokenQuery: []
+tags:
+- name: Authentication
+  description: Token generation for trial and firm users.
+paths:
+  /tokens/trial:
+    post:
+      operationId: createTrialToken
+      tags:
+      - Authentication
+      summary: Token for trial user
+      description: Exchange trial-user credentials for an access token. Modeled path. The token expires after 24 hours and is passed on subsequent requests as the `_token` query parameter.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credentials'
+      responses:
+        '200':
+          description: An access token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /tokens/firm:
+    post:
+      operationId: createFirmToken
+      tags:
+      - Authentication
+      summary: Token for firm user
+      description: Exchange firm-user credentials for an access token. Modeled path. The token expires after 24 hours.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credentials'
+      responses:
+        '200':
+          description: An access token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Missing, invalid, or expired token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Access token, valid for 24 hours.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    Credentials:
+      type: object
+      required:
+      - username
+      - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+  securitySchemes:
+    tokenQuery:
+      type: apiKey
+      in: query
+      name: _token
+      description: Access token obtained from the token endpoints (trial or firm user) and appended to each request as the `_token` query parameter. Expires after 24 hours.

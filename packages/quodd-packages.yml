@@ -1,0 +1,34 @@
+generated: '2026-07-22'
+method: searched
+source: npm, PyPI, NuGet, RubyGems, Packagist, crates.io, pkg.go.dev, developer.quodd.com
+description: >-
+  QUODD publishes no first-party client libraries on the public package
+  registries. Searches of npm, PyPI, NuGet, RubyGems, Packagist, crates.io, and
+  pkg.go.dev on the probe date returned no QUODD-owned packages. What QUODD does
+  publish is downloadable gRPC client example code (not registry packages)
+  bundled with its proto files on the Developer Platform. Third-party WebSocket
+  access to QUODD feeds exists via Intrinio's Real-Time SDKs, which are
+  Intrinio's packages, not QUODD's.
+packages: []
+code_examples:
+- name: snap-grpc-api
+  languages: [csharp, golang, node]
+  format: zip download (proto + client examples)
+  url: https://developer.quodd.com/assets/files/snap-grpc-api-83f1013fe8601893b396f6cf04ee2f88.zip
+  docs: https://developer.quodd.com/docs/snap-grpc-api
+  official: true
+- name: ticker-info-grpc-api
+  languages: [ruby]
+  format: zip download (proto + client examples)
+  url: https://developer.quodd.com/assets/files/ticker-info-grpc-api-b69d5ffe0cbb3a8b8f323935d7818c11.zip
+  docs: https://developer.quodd.com/docs/ticker-info-grpc-api
+  official: true
+- name: option-lookup-grpc-api
+  languages: []
+  format: zip download (proto only)
+  url: https://developer.quodd.com/assets/files/option-lookup-grpc-api-5d64a05181606aefbb58890bd6288b40.zip
+  docs: https://developer.quodd.com/docs/option-lookup-grpc-api
+  official: true
+notes: >-
+  No SDKs pointer is emitted because no installable first-party SDK exists on
+  any registry as of the probe date.

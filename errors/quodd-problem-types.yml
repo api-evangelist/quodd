@@ -1,0 +1,31 @@
+generated: '2026-07-22'
+method: derived
+source: openapi/quodd-snapshots-api-openapi.yml, openapi/quodd-options-api-openapi.yml, openapi/quodd-authentication-api-openapi.yml, https://developer.quodd.com/docs/rest-api
+format: json
+description: >-
+  Error surface derived from the modeled OpenAPI plus the published QUODD
+  reference. QUODD does not use RFC 9457 problem+json; REST errors are a plain
+  JSON object (code, message) and, notably, per-instrument errors on snapshot
+  responses are carried in-payload in an Error field on each snapshot object
+  (also present as the error field on gRPC SnapResponse, ErrorInfoMessage, and
+  lookup responses).
+envelope:
+  rest: 'Error object: { code, message }; per-ticker errors in the Error field of each snapshot.'
+  grpc: 'error string fields on SnapResponse / GetOptionTickersResponse / GetOptionExpirationsResponse; ErrorInfoMessage { ticker, error, message } on TickerInfoResponse.'
+problems:
+- status: 401
+  title: Unauthorized
+  detail: Missing, invalid, or expired token. Tokens expire after 24 hours and must be regenerated via the token endpoints.
+  remediation: Re-authenticate with POST token-for-trial-user or token-for-firm-user and retry with the fresh _token query parameter.
+  source_operation: openapi/quodd-snapshots-api-openapi.yml#getSnap
+- status: 401
+  title: Unauthorized (token generation)
+  detail: Invalid trial or firm user credentials.
+  source_operation: openapi/quodd-authentication-api-openapi.yml#createTrialToken
+- status: 200
+  title: In-payload instrument error
+  detail: >-
+    A snapshot request can succeed overall while individual instruments fail;
+    the Error field on the affected snapshot object carries the error details
+    (documented in the published Snap response schema).
+  source_operation: openapi/quodd-snapshots-api-openapi.yml#listSnaps
