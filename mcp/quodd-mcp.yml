@@ -1,13 +1,12 @@
 generated: '2026-07-22'
 method: derived
 status: candidate
-source: openapi/quodd-snapshots-api-openapi.yml, openapi/quodd-options-api-openapi.yml, openapi/quodd-authentication-api-openapi.yml, grpc/quodd-grpc.yml
-description: >-
-  QUODD publishes no official hosted MCP server (no MCP endpoint on
-  developer.quodd.com or api.quodd.com, no GitHub org, no entry in the official
-  MCP registry as of the probe date). This is a candidate tool list derived
-  from the modeled OpenAPI operations and the published gRPC service
-  definitions, describing what a QUODD MCP server would expose.
+source: openapi/quodd-snapshots-api-openapi.yml, openapi/quodd-options-api-openapi.yml, openapi/quodd-authentication-api-openapi.yml,
+  grpc/quodd-grpc.yml
+description: QUODD publishes no official hosted MCP server (no MCP endpoint on developer.quodd.com or
+  api.quodd.com, no GitHub org, no entry in the official MCP registry as of the probe date). This is a
+  candidate tool list derived from the modeled OpenAPI operations and the published gRPC service definitions,
+  describing what a QUODD MCP server would expose.
 server:
   name: quodd
   transport: http
@@ -45,3 +44,9 @@ tools:
 - name: get_option_expirations
   description: List options expiration dates for an underlying ticker (gRPC OptionLookupService.GetOptionExpirations).
   source_operation: grpc/quodd-optionlookup.proto#GetOptionExpirations
+deployment:
+  mode: none
+  verified: derived
+  tools: 11
+  checked: '2026-08-12'
+  source: catalog MCP census

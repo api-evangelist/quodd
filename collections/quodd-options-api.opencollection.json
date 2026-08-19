@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "QUODD Market Data API (Modeled) Authentication Options API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "_token",
+      "value": "{{_token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Options",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get an options pricing snapshot for one contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quodd.com/options/snap/:ticker",
+            "params": [
+              {
+                "name": "ticker",
+                "value": "",
+                "type": "path",
+                "description": "Option contract symbol."
+              }
+            ]
+          },
+          "docs": "Real-time or delayed pricing snapshot for a single option contract. Modeled path."
+        },
+        {
+          "info": {
+            "name": "Get options snapshots for many contracts (batch)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quodd.com/options/snaps",
+            "params": [
+              {
+                "name": "tickers",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of option contract symbols."
+              }
+            ]
+          },
+          "docs": "Batch options snapshot retrieval via a comma-separated contract list. Modeled path."
+        },
+        {
+          "info": {
+            "name": "Get options snapshots for many contracts (batch, POST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.quodd.com/options/snaps",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Batch options snapshot retrieval via a contract array in the request body. Modeled path."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

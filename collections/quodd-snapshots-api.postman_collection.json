@@ -1,0 +1,465 @@
+{
+  "item": [
+    {
+      "id": "57a32734-3b44-438e-91fb-020655f7f811",
+      "name": "Snapshots",
+      "description": {
+        "content": "Real-time or delayed equity pricing snapshots.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4543bd76-8f0c-44e1-a3d2-a451d19191e3",
+          "name": "Get a pricing snapshot for one ticker",
+          "request": {
+            "name": "Get a pricing snapshot for one ticker",
+            "description": {
+              "content": "Real-time or delayed pricing snapshot for a single instrument. Modeled path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snap",
+                ":ticker"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ticker",
+                  "description": "(Required) Instrument symbol."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e908d486-ce20-4fb1-b60e-46abb58d033b",
+              "name": "A pricing snapshot.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snap",
+                    ":ticker"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticker",
+                      "description": "(Required) Instrument symbol."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ticker\": \"string\",\n  \"last\": 1363.9137328591066,\n  \"bid\": 7203.3236556476095,\n  \"ask\": 6979.512867518493,\n  \"volume\": 3137,\n  \"currency\": \"string\",\n  \"timestamp\": \"2015-06-15T19:51:37.452Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7c9939a-cb82-4b62-bc5c-d6c30b0f1abc",
+              "name": "Missing, invalid, or expired token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snap",
+                    ":ticker"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticker",
+                      "description": "(Required) Instrument symbol."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "083de424-21b9-45d5-a0ca-6bf0d593b442",
+          "name": "Get snapshots for many tickers (batch)",
+          "request": {
+            "name": "Get snapshots for many tickers (batch)",
+            "description": {
+              "content": "Batch snapshot retrieval via a comma-separated ticker list. Modeled path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snaps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "tickers",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of instrument symbols."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ddd0dd0e-b7cb-46ca-98ab-00810fca26a2",
+              "name": "A batch of pricing snapshots.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snaps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tickers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"ticker\": \"string\",\n      \"last\": 1469.1103700061103,\n      \"bid\": 8054.326292265173,\n      \"ask\": 8781.546269708731,\n      \"volume\": 1701,\n      \"currency\": \"string\",\n      \"timestamp\": \"2018-06-30T04:12:59.607Z\"\n    },\n    {\n      \"ticker\": \"string\",\n      \"last\": 7671.23216772216,\n      \"bid\": 7841.729657998727,\n      \"ask\": 4878.212001230063,\n      \"volume\": 5667,\n      \"currency\": \"string\",\n      \"timestamp\": \"1965-08-13T16:38:48.468Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c756d490-be12-43b2-8d8b-5131ba8ae3ad",
+              "name": "Missing, invalid, or expired token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snaps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tickers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "99e6e7a0-36c4-419c-a0dd-1e67ac5060fe",
+          "name": "Get snapshots for many tickers (batch, POST)",
+          "request": {
+            "name": "Get snapshots for many tickers (batch, POST)",
+            "description": {
+              "content": "Batch snapshot retrieval via a ticker array in the request body. Modeled path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snaps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tickers\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ebc20c12-da75-410f-88ce-41be70aebfca",
+              "name": "A batch of pricing snapshots.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snaps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tickers\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"ticker\": \"string\",\n      \"last\": 2042.7563240029733,\n      \"bid\": 3651.6692951034456,\n      \"ask\": 5369.063122562095,\n      \"volume\": 635,\n      \"currency\": \"string\",\n      \"timestamp\": \"1984-09-16T13:04:45.865Z\"\n    },\n    {\n      \"ticker\": \"string\",\n      \"last\": 3938.6845537911,\n      \"bid\": 8679.051285470216,\n      \"ask\": 4184.700924493141,\n      \"volume\": 4801,\n      \"currency\": \"string\",\n      \"timestamp\": \"1976-04-30T00:17:48.769Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aad1c070-9432-412a-9190-3e5808331109",
+              "name": "Missing, invalid, or expired token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snaps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tickers\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.quodd.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "_token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a06062b6-b4fc-40e4-a800-d09eb3ee59f7",
+    "name": "QUODD Market Data API (Modeled) Authentication Snapshots API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A modeled OpenAPI description of the QUODD REST market data API. QUODD is a cloud-native market data provider. Its Developer Platform (developer.quodd.com) documents a token-authenticated REST API for pricing snapshots - Snap, Batch Snaps, Options Snap, and Batch Options Snaps - plus token generation for trial and firm users. Authentication exchanges a username and password for an access token that is appended to requests as the `_token` query parameter and expires after 24 hours.\nIMPORTANT - endpointsModeled: QUODD does not publish its literal REST base URL or exact endpoint path format openly (production access is gated behind trial/firm credentials and enterprise agreements). The paths below are honestly modeled from the documented operation list and may differ from the live routes. They represent the documented surface, not verified endpoints. No WebSocket or Server-Sent Events transport is documented on QUODD's own platform; QUODD's Cloud Streaming transport is not publicly specified.\n\nContact Support:\n Name: QUODD",
+      "type": "text/plain"
+    }
+  }
+}

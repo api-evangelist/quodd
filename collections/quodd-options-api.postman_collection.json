@@ -1,0 +1,474 @@
+{
+  "item": [
+    {
+      "id": "aab4b298-e4c2-4f6f-8ad4-59c3f0d36ffd",
+      "name": "Options",
+      "description": {
+        "content": "Real-time or delayed options pricing snapshots.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eae99899-6ae1-496c-afe1-223e2ada7308",
+          "name": "Get an options pricing snapshot for one contract",
+          "request": {
+            "name": "Get an options pricing snapshot for one contract",
+            "description": {
+              "content": "Real-time or delayed pricing snapshot for a single option contract. Modeled path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "options",
+                "snap",
+                ":ticker"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ticker",
+                  "description": "(Required) Option contract symbol."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ebd47b18-fd4d-41a3-b59d-1c9b41e6337a",
+              "name": "An options pricing snapshot.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "options",
+                    "snap",
+                    ":ticker"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticker",
+                      "description": "(Required) Option contract symbol."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ticker\": \"string\",\n  \"last\": 3871.1133181306122,\n  \"bid\": 5488.388013608363,\n  \"ask\": 6355.16548491752,\n  \"volume\": 842,\n  \"currency\": \"string\",\n  \"timestamp\": \"1999-12-15T14:49:24.866Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3641df66-7d60-4418-80d3-58c7024ab2ca",
+              "name": "Missing, invalid, or expired token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "options",
+                    "snap",
+                    ":ticker"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticker",
+                      "description": "(Required) Option contract symbol."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7eaca7e-5700-44cf-8550-50ba756838fe",
+          "name": "Get options snapshots for many contracts (batch)",
+          "request": {
+            "name": "Get options snapshots for many contracts (batch)",
+            "description": {
+              "content": "Batch options snapshot retrieval via a comma-separated contract list. Modeled path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "options",
+                "snaps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "tickers",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of option contract symbols."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ea981e2-17db-4d5b-8a82-58c6292a5d9c",
+              "name": "A batch of options pricing snapshots.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "options",
+                    "snaps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tickers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"ticker\": \"string\",\n      \"last\": 6177.653932706113,\n      \"bid\": 807.6663878491619,\n      \"ask\": 4990.919197429391,\n      \"volume\": 1528,\n      \"currency\": \"string\",\n      \"timestamp\": \"1959-05-26T19:24:53.326Z\"\n    },\n    {\n      \"ticker\": \"string\",\n      \"last\": 5333.400469686078,\n      \"bid\": 6314.1378847644455,\n      \"ask\": 9911.673703044906,\n      \"volume\": 5159,\n      \"currency\": \"string\",\n      \"timestamp\": \"1991-12-22T23:23:00.888Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2dca60b7-c0be-4e3b-a6df-2c9c531bc39d",
+              "name": "Missing, invalid, or expired token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "options",
+                    "snaps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tickers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53110d3a-a7bc-495a-bbd6-b15b94d6f377",
+          "name": "Get options snapshots for many contracts (batch, POST)",
+          "request": {
+            "name": "Get options snapshots for many contracts (batch, POST)",
+            "description": {
+              "content": "Batch options snapshot retrieval via a contract array in the request body. Modeled path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "options",
+                "snaps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tickers\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c94d371c-c669-42a1-b4db-b73b8cbdad14",
+              "name": "A batch of options pricing snapshots.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "options",
+                    "snaps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tickers\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"ticker\": \"string\",\n      \"last\": 6768.9200530484395,\n      \"bid\": 3866.378833898434,\n      \"ask\": 3754.952971190466,\n      \"volume\": 4228,\n      \"currency\": \"string\",\n      \"timestamp\": \"1974-05-30T04:18:15.499Z\"\n    },\n    {\n      \"ticker\": \"string\",\n      \"last\": 4972.819398460603,\n      \"bid\": 5971.083552896813,\n      \"ask\": 9542.959150639266,\n      \"volume\": 1988,\n      \"currency\": \"string\",\n      \"timestamp\": \"1983-10-04T01:22:11.243Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e811491-742e-485f-9ead-0a3121402e4f",
+              "name": "Missing, invalid, or expired token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "options",
+                    "snaps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tickers\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.quodd.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "_token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d4ed6d9d-9157-4862-a1ba-c855c288d632",
+    "name": "QUODD Market Data API (Modeled) Authentication Options API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A modeled OpenAPI description of the QUODD REST market data API. QUODD is a cloud-native market data provider. Its Developer Platform (developer.quodd.com) documents a token-authenticated REST API for pricing snapshots - Snap, Batch Snaps, Options Snap, and Batch Options Snaps - plus token generation for trial and firm users. Authentication exchanges a username and password for an access token that is appended to requests as the `_token` query parameter and expires after 24 hours.\nIMPORTANT - endpointsModeled: QUODD does not publish its literal REST base URL or exact endpoint path format openly (production access is gated behind trial/firm credentials and enterprise agreements). The paths below are honestly modeled from the documented operation list and may differ from the live routes. They represent the documented surface, not verified endpoints. No WebSocket or Server-Sent Events transport is documented on QUODD's own platform; QUODD's Cloud Streaming transport is not publicly specified.\n\nContact Support:\n Name: QUODD",
+      "type": "text/plain"
+    }
+  }
+}

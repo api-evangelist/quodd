@@ -1,0 +1,343 @@
+{
+  "item": [
+    {
+      "id": "31649b26-48b6-432a-b491-b18ce7c1f780",
+      "name": "Authentication",
+      "description": {
+        "content": "Token generation for trial and firm users.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bce12bed-3274-4157-9024-1d87383e5c3d",
+          "name": "Token for trial user",
+          "request": {
+            "name": "Token for trial user",
+            "description": {
+              "content": "Exchange trial-user credentials for an access token. Modeled path. The token expires after 24 hours and is passed on subsequent requests as the `_token` query parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tokens",
+                "trial"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1e9ab886-5f8b-4e75-acb1-e7c87ef0f07c",
+              "name": "An access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    "trial"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17f7d4ef-e2ae-4d79-9e9f-3e5020638f8d",
+              "name": "Missing, invalid, or expired token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    "trial"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d500ffa-ce2c-4670-bc6e-d8654beecfc1",
+          "name": "Token for firm user",
+          "request": {
+            "name": "Token for firm user",
+            "description": {
+              "content": "Exchange firm-user credentials for an access token. Modeled path. The token expires after 24 hours.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tokens",
+                "firm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0eac2841-0374-46a7-bdd7-bf4186d65227",
+              "name": "An access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    "firm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "166de090-b979-4365-b633-dd23ede36278",
+              "name": "Missing, invalid, or expired token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    "firm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.quodd.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "_token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "feb55921-3e05-47e0-9392-8f1c7f3bea4f",
+    "name": "QUODD Market Data API (Modeled) Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A modeled OpenAPI description of the QUODD REST market data API. QUODD is a cloud-native market data provider. Its Developer Platform (developer.quodd.com) documents a token-authenticated REST API for pricing snapshots - Snap, Batch Snaps, Options Snap, and Batch Options Snaps - plus token generation for trial and firm users. Authentication exchanges a username and password for an access token that is appended to requests as the `_token` query parameter and expires after 24 hours.\nIMPORTANT - endpointsModeled: QUODD does not publish its literal REST base URL or exact endpoint path format openly (production access is gated behind trial/firm credentials and enterprise agreements). The paths below are honestly modeled from the documented operation list and may differ from the live routes. They represent the documented surface, not verified endpoints. No WebSocket or Server-Sent Events transport is documented on QUODD's own platform; QUODD's Cloud Streaming transport is not publicly specified.\n\nContact Support:\n Name: QUODD",
+      "type": "text/plain"
+    }
+  }
+}

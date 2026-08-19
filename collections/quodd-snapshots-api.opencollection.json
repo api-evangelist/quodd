@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "QUODD Market Data API (Modeled) Authentication Snapshots API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "_token",
+      "value": "{{_token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Snapshots",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a pricing snapshot for one ticker",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quodd.com/snap/:ticker",
+            "params": [
+              {
+                "name": "ticker",
+                "value": "",
+                "type": "path",
+                "description": "Instrument symbol."
+              }
+            ]
+          },
+          "docs": "Real-time or delayed pricing snapshot for a single instrument. Modeled path."
+        },
+        {
+          "info": {
+            "name": "Get snapshots for many tickers (batch)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quodd.com/snaps",
+            "params": [
+              {
+                "name": "tickers",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of instrument symbols."
+              }
+            ]
+          },
+          "docs": "Batch snapshot retrieval via a comma-separated ticker list. Modeled path."
+        },
+        {
+          "info": {
+            "name": "Get snapshots for many tickers (batch, POST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.quodd.com/snaps",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Batch snapshot retrieval via a ticker array in the request body. Modeled path."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
