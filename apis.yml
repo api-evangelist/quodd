@@ -12,6 +12,18 @@ description: >-
   more than 250 billion data points across 150-plus global exchanges. Developer documentation
   is public, but production access is gated behind trial or firm credentials and enterprise
   contact-sales agreements; exact REST base URLs and full endpoint paths are not published openly.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
