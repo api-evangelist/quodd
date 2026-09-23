@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: QUODD Market Data API (Modeled) Authentication Options API
-  description: 'A modeled OpenAPI description of the QUODD REST market data API. QUODD is a cloud-native market data provider. Its Developer Platform (developer.quodd.com) documents a token-authenticated REST API for pricing snapshots - Snap, Batch Snaps, Options Snap, and Batch Options Snaps - plus token generation for trial and firm users. Authentication exchanges a username and password for an access token that is appended to requests as the `_token` query parameter and expires after 24 hours.
-
-    IMPORTANT - endpointsModeled: QUODD does not publish its literal REST base URL or exact endpoint path format openly (production access is gated behind trial/firm credentials and enterprise agreements). The paths below are honestly modeled from the documented operation list and may differ from the live routes. They represent the documented surface, not verified endpoints. No WebSocket or Server-Sent Events transport is documented on QUODD''s own platform; QUODD''s Cloud Streaming transport is not publicly specified.'
+  title: QUODD Market Data API (Modeled) Options API
+  description: A modeled OpenAPI description of the QUODD REST market data API.
   version: '1.0'
   contact:
     name: QUODD
@@ -95,20 +93,6 @@ components:
           type: array
           items:
             type: string
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    SnapBatch:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Snap'
     Snap:
       type: object
       description: A pricing snapshot. Field set is modeled and representative, not exhaustive.
@@ -128,6 +112,20 @@ components:
         timestamp:
           type: string
           format: date-time
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    SnapBatch:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Snap'
   responses:
     Unauthorized:
       description: Missing, invalid, or expired token.
