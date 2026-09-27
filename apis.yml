@@ -53,6 +53,7 @@ modified: '2026-07-22'
 specificationVersion: '0.23'
 apis:
 - aid: quodd:quodd-snap-api
+  endpointsModeled: true
   name: QUODD Snap API
   tags:
   - Market Data
@@ -158,6 +159,7 @@ apis:
     (Cloud Search). Listed as Beta Access on the QUODD Developer Platform; endpoint paths are
     modeled.
 - aid: quodd:quodd-historical-prices-api
+  endpointsModeled: true
   name: QUODD Historical Prices API
   tags:
   - Historical Data
@@ -177,6 +179,7 @@ apis:
     dividends, spinoffs). Described in QUODD product documentation; concrete endpoints are modeled,
     not published.
 - aid: quodd:quodd-reference-data-security-master-api
+  endpointsModeled: true
   name: QUODD Reference Data & Security Master API
   tags:
   - Reference Data
@@ -194,6 +197,7 @@ apis:
     data, funds, corporate actions, dividends, and fixed income terms and conditions. Described
     in QUODD product documentation; concrete endpoints are modeled, not published.
 - aid: quodd:quodd-fundamentals-estimates-api
+  endpointsModeled: true
   name: QUODD Fundamentals & Estimates API
   tags:
   - Fundamentals
