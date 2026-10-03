@@ -61,6 +61,12 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Access token, valid for 24 hours.
     Error:
       type: object
       properties:
@@ -78,12 +84,6 @@ components:
           type: string
         password:
           type: string
-    TokenResponse:
-      type: object
-      properties:
-        token:
-          type: string
-          description: Access token, valid for 24 hours.
   responses:
     Unauthorized:
       description: Missing, invalid, or expired token.
