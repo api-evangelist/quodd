@@ -83,23 +83,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Missing, invalid, or expired token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    TickerList:
-      type: object
-      required:
-      - tickers
-      properties:
-        tickers:
-          type: array
-          items:
-            type: string
     Snap:
       type: object
       description: A pricing snapshot. Field set is modeled and representative, not exhaustive.
@@ -119,13 +103,6 @@ components:
         timestamp:
           type: string
           format: date-time
-    SnapBatch:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Snap'
     Error:
       type: object
       properties:
@@ -133,6 +110,29 @@ components:
           type: string
         message:
           type: string
+    SnapBatch:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Snap'
+    TickerList:
+      type: object
+      required:
+      - tickers
+      properties:
+        tickers:
+          type: array
+          items:
+            type: string
+  responses:
+    Unauthorized:
+      description: Missing, invalid, or expired token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     tokenQuery:
       type: apiKey
