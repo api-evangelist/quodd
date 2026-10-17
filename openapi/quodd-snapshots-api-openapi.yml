@@ -84,6 +84,13 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     Snap:
       type: object
       description: A pricing snapshot. Field set is modeled and representative, not exhaustive.
@@ -103,20 +110,6 @@ components:
         timestamp:
           type: string
           format: date-time
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    SnapBatch:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Snap'
     TickerList:
       type: object
       required:
@@ -126,6 +119,13 @@ components:
           type: array
           items:
             type: string
+    SnapBatch:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Snap'
   responses:
     Unauthorized:
       description: Missing, invalid, or expired token.
